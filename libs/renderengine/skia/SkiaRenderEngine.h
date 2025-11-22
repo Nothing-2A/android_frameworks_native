@@ -41,6 +41,9 @@
 #include "filters/LinearEffect.h"
 #include "filters/LutShader.h"
 #include "filters/StretchShaderFactory.h"
+#ifdef MTK_IN_DISPLAY_FINGERPRINT
+#include "../mediatek/SkiaDitherEffect.h"
+#endif
 
 class SkData;
 
@@ -80,6 +83,9 @@ public:
     void ensureContextsCreated();
 
 protected:
+#ifdef MTK_IN_DISPLAY_FINGERPRINT
+    SkiaDitherEffect * mSkiaDitherEffect = nullptr;
+#endif
     // This is so backends can stop the generic rendering state first before cleaning up
     // backend-specific state. SkiaGpuContexts are invalid after invocation.
     void finishRenderingAndAbandonContexts();
